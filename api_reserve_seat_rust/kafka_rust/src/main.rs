@@ -7,7 +7,10 @@ use rdkafka::{
 };
 
 #[tokio::main]
-async fn main() {}
+async fn main() {
+    produce_ksf().await;
+    consumer_ksf().await;
+}
 
 async fn produce_ksf() {
     let producer: FutureProducer = ClientConfig::new()
