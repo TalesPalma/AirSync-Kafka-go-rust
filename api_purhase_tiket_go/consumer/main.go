@@ -21,7 +21,7 @@ func consumer() {
 	}
 	defer consumer.Close()
 
-	partitionConsumer, err := consumer.ConsumePartition("test-topic", 0, sarama.OffsetNewest)
+	partitionConsumer, err := consumer.ConsumePartition("test-topic", 0, sarama.OffsetOldest)
 	if err != nil {
 		log.Fatalf("Error consuming partition %v", err)
 	}

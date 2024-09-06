@@ -8,7 +8,7 @@ use rdkafka::{
 
 #[tokio::main]
 async fn main() {
-    produce_ksf().await;
+    consumer_ksf().await;
 }
 
 async fn produce_ksf() {
@@ -18,7 +18,7 @@ async fn produce_ksf() {
         .expect("Producer creation failed");
 
     let topic = "test-topic";
-    let payload = "Mensagem kafka";
+    let payload = "Nova mensagem";
 
     producer
         .send(
@@ -38,11 +38,12 @@ async fn consumer_ksf() {
         .set("enable.partition.eof", "false")
         .set("session.timeout.ms", "6000")
         .set("enable.auto.commit", "true")
+        .set("auto.offset.reset", "earliest")
         .create()
         .expect("Consumer creation error");
 
     consumer
-        .subscribe(&["meu-topico"])
+        .subscribe(&["test-topic"])
         .expect("Failed to subscribe to topic");
 
     loop {
